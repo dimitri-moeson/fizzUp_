@@ -1,0 +1,108 @@
+<?php
+    /** @var \Laminas\Diactoros\Response\HtmlResponse $this */
+    
+    $title = $this->translate("Votre avis nous interesse!");
+    $this->headMeta()->appendName('keywords','avis,feedback,commentaires');
+    $this->headMeta()->appendName('decription','donnez votre avis,feedback,commentaires');
+    
+    $this->headTitle($this->escapeHtml($title));
+    
+    /** @var \Laminas\Form\Form $form */
+    $form = $this->form;
+    
+    $form->setAttribute('action',$this->url('comment'));
+    $form->prepare();
+    
+    ?>
+
+<div class="container">
+
+    <div class="row align-items-center justify-content-center">
+        
+        <div class="col-md-6 shadow-sm">
+            
+            <h2 class="pt-2 text-center">
+                <span class="text-muted"><?= $this->translate("Faites-nous part de votre avis."); ?></span>
+            </h2>
+            
+            <?= $this->form()->openTag($form) ?>
+            
+            <div class="mb-3">
+
+                <?= $this->formLabel($form->get('pseudo')) ?>
+                <div class="input-group">
+                    <?= $this->formText($form->get('pseudo')) ?>
+                </div>
+                <div class="text-danger">
+                    <?= $this->formElementErrors($form->get('pseudo')) ?>
+                </div>
+            
+            </div>
+    
+            <div class="mb-3">
+        
+                
+                <?= $this->formLabel($form->get('email')) ?>
+                <div class="input-group">
+                    <?= $this->formEmail($form->get('email')) ?>
+                </div>
+                <div class="text-danger">
+                    <?= $this->formElementErrors($form->get('email')) ?>
+                </div>
+                
+            </div>
+
+            <div class="mb-3">
+        
+                <?= $this->formLabel($form->get('note')) ?>
+                <div class="input-group">
+                    <?= $this->formRange($form->get('note')) ?>
+                </div>
+                <div class="text-danger">
+                    <?= $this->formElementErrors($form->get('note')) ?>
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+        
+                <?= $this->formLabel($form->get('comment')) ?>
+                <div class="input-group">
+                    <?= $this->formHidden($form->get('comment')) ?>
+                    <trix-editor resizable="true" input="x" class="form-control" placeholder='Saisir votre commentaire' title='Saisir votre commentaire.'></trix-editor>
+                </div>
+                <div class="text-danger">
+                    <?= $this->formElementErrors($form->get('comment')) ?>
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+        
+                <?= $this->formLabel($form->get('photo')) ?>
+                <div class="input-group">
+                    <?= $this->formFile($form->get('photo')) ?>
+                </div>
+                <div class="text-danger">
+                    <?= $this->formElementErrors($form->get('photo')) ?>
+                </div>
+
+            </div>
+    
+            <div class="mb-3">
+    
+            <?= $this->formHidden($form->get('comment_csrf')) ?>
+                <div class="text-danger">
+                    <?= $this->formElementErrors($form->get('comment_csrf')) ?>
+                </div>
+
+            </div>
+    
+            <?= $this->formSubmit($form->get('comment_create')) ?>
+            
+            <?= $this->form()->closeTag() ?>
+            
+        </div>
+    
+    </div>
+</div>

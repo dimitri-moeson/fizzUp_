@@ -1,0 +1,41 @@
+<div  class="table-responsive">
+
+    <h1><?= $this->escapeHtml($this->translate("Commentaires")) ?></h1>
+
+    <table id="list-comment" class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th data-filterable="false" data-sortable="false">#</th>
+            <th data-filterable="false" data-sortable="false"><?= $this->escapeHtml($this->translate("Pseudo")) ?></th>
+            <th data-filterable="false" data-sortable="false"><?= $this->escapeHtml($this->translate("Email")) ?></th>
+            <th data-sortable="false"><?= $this->escapeHtml($this->translate("Picture")) ?></th>
+            <th data-sortable="true"><?= $this->escapeHtml($this->translate("Note")) ?></th>
+            <th data-filter-control="select" data-filterable="true" data-sortable="true"><?= $this->escapeHtml($this->translate("Date de création")) ?></th>
+            <th data-sortable="false"><?= $this->escapeHtml($this->translate("Commentaire")) ?></th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+<?php  foreach($this->avis as $medoc ){
+    
+    /**
+     * @var Laminas\View\Renderer\PhpRenderer $this
+     * @var \App\Model\Entity\CommentEntity $medoc
+     */
+    ?>
+    <tr>
+        <td><?= $medoc->getId(); ?></td>
+        <td><?= $medoc->getPseudo(); ?></td>
+        <td><?= $medoc->getEmail(); ?></td>
+        <td><img src="images/<?= $medoc->getPhoto(); ?>" alt="<?= $medoc->getPhoto(); ?>"></td>
+        <td><?= $medoc->getNote(); ?></td>
+        <td><?= $medoc->getDateCreate(); ?></td>
+        <td class="trix-content"><?= $medoc->getComment(); ?></td>
+    </tr>
+
+<?php } ?>
+
+        </tbody>
+    </table>
+</div>
