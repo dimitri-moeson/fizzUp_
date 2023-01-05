@@ -9,7 +9,6 @@ use App\Model\Table\CommentsTable;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Csrf\CsrfMiddleware;
 use Mezzio\Flash\FlashMessageMiddleware;
-use PHPThumb\GD as PhotoMaker;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -114,7 +113,7 @@ class CommentHandler implements RequestHandlerInterface, MiddlewareInterface
         ));
     }
     
-    private function save_photo(){
+    private function save_photo($max = 100){
     
         $typeok = TRUE;
     
@@ -136,7 +135,7 @@ class CommentHandler implements RequestHandlerInterface, MiddlewareInterface
         if ($typeok)
         {
             list($w, $h) = getimagesize($saveto);
-            $max = 100;
+            
             $tw = $w;
             $th = $h;
             if ($w > $h && $max < $w)
@@ -166,7 +165,6 @@ class CommentHandler implements RequestHandlerInterface, MiddlewareInterface
             imagedestroy($src);
         }
         
-        //unlink($_FILES['photo']['tmp_name']);
         
         return $name ;
     }
