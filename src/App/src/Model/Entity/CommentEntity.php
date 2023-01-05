@@ -11,7 +11,7 @@
     
     class CommentEntity
     {
-        protected $id;
+        protected $comment_id;
         protected $email;
         protected $pseudo;
         protected $note;
@@ -118,8 +118,16 @@
         /**
          * @return mixed
          */
-        public function getId()
+        public function getCommentId()
         {
-            return $this->id;
+            return $this->comment_id;
+        }
+    
+        /**
+         * @param mixed $comment_id
+         */
+        public function setCommentId($comment_id)
+        {
+            $this->comment_id = $comment_id;
         }
     }
